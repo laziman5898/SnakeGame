@@ -14,7 +14,7 @@ snake = Snake()
 food = food()
 scoreboard = Scoreboard()
 snake.setup()
-
+collision=False
 def gameOff():
     global gameState
     gameState=not gameState
@@ -32,12 +32,17 @@ while gameState:
 
 #if the snake head collides with the wall end the game
     if snake.snakeBody[0].xcor() < -400 or snake.snakeBody[0].xcor() > 400 or snake.snakeBody[0].ycor() < -400 or snake.snakeBody[0].ycor() > 400 :
-        gameState=False
-        scoreboard.game_over()
-    for i in range(len(snake.snakeBody)-1,0 , -1):
+        snake.reset()
+        scoreboard.reset()
+
+    for i in range(len(snake.snakeBody)-1 ,0 , -1):
         if snake.snakeBody[0].distance(snake.snakeBody[i])<10:
-            gameState = False
-            scoreboard.game_over()
+            collision= True
+
+    if collision:
+        snake.reset()
+        scoreboard.reset()
+        collision=False
 
 
     canvas.listen()

@@ -38,6 +38,11 @@ class Snake():
     def head_position(self):
         position= (self.snakeBody[0].xcor(),self.snakeBody[0].ycor())
         return position
+    def reset(self):
+        for seg in self.snakeBody:
+            seg.goto(1000,1000)
+        self.snakeBody.clear()
+        self.setup()
 
 
 
